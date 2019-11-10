@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.home.upcoming.UpcomingEvents"></activity>
+        <activity android:name=".ui.calendar.CalendarActivity"></activity>
+        <activity android:name=".ui.home.upcoming.UpcomingEvents" />
         <activity android:name=".ui.home.upcoming.details.EventDetailsHostActivity" />
         <activity android:name=".ui.home.upcoming.details.EventDetailsActivity" />
         <activity android:name=".ui.carpool.CampusCarpoolActivity" />
