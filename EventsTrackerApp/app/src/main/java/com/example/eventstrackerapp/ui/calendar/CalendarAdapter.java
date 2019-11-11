@@ -2,6 +2,8 @@ package com.example.eventstrackerapp.ui.calendar;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Interpolator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +11,19 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventstrackerapp.Event;
 import com.example.eventstrackerapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,7 +37,7 @@ public class CalendarAdapter extends ArrayAdapter {
     private Calendar currentDate;
     private List<Event> allEvents;
 
-    public CalendarAdapter(Context context, List<Date> monthDates, Calendar currentDate, List<Event> allEvents){
+    public CalendarAdapter(Context context, List<Date> monthDates, Calendar currentDate, final List<Event> allEvents){
         super(context, R.layout.calendar_cell_layout);
         this.monthDates = monthDates;
         this.currentDate = currentDate;
@@ -97,16 +107,6 @@ public class CalendarAdapter extends ArrayAdapter {
         cellNumber.setText(String.valueOf(dayValue));
 
         // Add the events to the calendar
-//        TextView eventIndicator = view.findViewById(R.id.event_id);
-//        Calendar eventCalendar = Calendar.getInstance(); // Get a calendar for the events
-//        for(int i=0; i<allEvents.size(); i++){
-//            eventCalendar.setTime(allEvents.get(i).getStart());
-//            if(dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) &&
-//                    displayMonth == eventCalendar.get(Calendar.MONTH) + 1 &&
-//                    displayYear == eventCalendar.get(Calendar.YEAR)){
-//                eventIndicator.setBackgroundColor(Color.parseColor("#FF4081"));
-//            }
-//        }
 
         return view;
     }
