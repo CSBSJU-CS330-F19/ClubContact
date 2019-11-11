@@ -28,6 +28,14 @@
             android:id="@+id/nav_viewAllEvents"
             android:icon="@drawable/ic_all_events"
             android:title="@string/nav_all_events" />
+        <item
+            android:id="@+id/nav_manageUsers"
+            android:icon="@drawable/ic_manage_users"
+            android:title="@string/nav_manage_users" />
+        <item
+            android:id="@+id/nav_manageEvents"
+            android:icon="@drawable/ic_manage_events"
+            android:title="@string/nav_manage_events" />
     </group>
 
     <item android:title="Communicate">

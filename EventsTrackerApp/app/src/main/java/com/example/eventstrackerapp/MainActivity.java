@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_calendar, R.id.nav_carpool,
                 R.id.nav_subscriptions, R.id.nav_share, R.id.nav_send,
-                R.id.nav_viewAllUsers)
+                R.id.nav_viewAllUsers, R.id.nav_manageEvents, R.id.nav_manageUsers)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
