@@ -11,11 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.example.eventstrackerapp.Event;
 import com.example.eventstrackerapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,6 +84,25 @@ public class CustomView extends LinearLayout {
         GridView gridView = (GridView) findViewById(R.id.calendar_grid);
 
         List<Date> cellDates = new ArrayList<Date>();
+
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd yyyy");
+        final List<Event> allEvents = new ArrayList<>();
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        CollectionReference allEventsCol = firebaseFirestore.collection("Events");
+        allEventsCol.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot : task.getResult()){
+                        allEvents.add(documentSnapshot.toObject(Event.class));
+                    }
+                } else{
+                    // ToDo: Give us an error message
+                }
+            }
+        });
+
+
         Calendar mCal = (Calendar) cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
         int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) - 1;
@@ -90,7 +116,7 @@ public class CustomView extends LinearLayout {
         String sDate = dateFormat.format(cal.getTime());
         currentDate.setText(sDate);
 
-        mAdapter = new CalendarAdapter(context, cellDates, cal, null);
+        mAdapter = new CalendarAdapter(context, cellDates, cal, allEvents);
         gridView.setAdapter(mAdapter);
 
     }
