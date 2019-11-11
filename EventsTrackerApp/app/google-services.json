@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "204288527118-vejqjagpnct1jcuusibsp338cmkrq9n4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eventstrackerapp",
+            "certificate_hash": "b9a8db3eec937b98cf5362619d90706c81bcf7ac"
+          }
+        },
+        {
           "client_id": "204288527118-343s0l0d5qfrk06r7oqag6ho6k90dika.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

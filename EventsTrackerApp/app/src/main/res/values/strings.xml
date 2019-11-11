@@ -9,6 +9,8 @@
     <string name="nav_all_events">View All Events</string>
     <string name="nav_club_events">View My Clubs Events</string>
     <string name="nav_club_members">View My Clubs Members</string>
+    <string name="nav_manage_users">Manage Users</string>
+    <string name="nav_manage_events">Manage Events</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>

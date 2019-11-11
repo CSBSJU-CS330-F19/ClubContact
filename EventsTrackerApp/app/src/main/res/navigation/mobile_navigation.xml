@@ -64,4 +64,16 @@
         android:name="com.example.eventstrackerapp.ui.send.SendFragment"
         android:label="@string/nav_club_events"
         tools:layout="@layout/fragment_club_events" />
+
+    <fragment
+        android:id="@+id/nav_manageUsers"
+        android:name="com.example.eventstrackerapp.ui.send.SendFragment"
+        android:label="@string/nav_manage_users"
+        tools:layout="@layout/fragment_manage_users" />
+
+    <fragment
+        android:id="@+id/nav_manageEvents"
+        android:name="com.example.eventstrackerapp.ui.send.SendFragment"
+        android:label="@string/nav_manage_events"
+        tools:layout="@layout/fragment_manage_events" />
 </navigation>
