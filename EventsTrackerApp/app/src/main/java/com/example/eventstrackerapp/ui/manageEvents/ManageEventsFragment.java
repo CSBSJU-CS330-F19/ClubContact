@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventstrackerapp.Event;
-import com.example.eventstrackerapp.EventAdapter;
+import com.example.eventstrackerapp.ui.allEvents.EventAdapter;
 import com.example.eventstrackerapp.R;
-import com.example.eventstrackerapp.UserAdapter;
-import com.example.eventstrackerapp.profile.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

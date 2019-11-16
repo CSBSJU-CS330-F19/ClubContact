@@ -7,44 +7,31 @@
     tools:context=".ui.carpool.CampusCarpoolActivity"
     >
 
-    <TextView
-        android:id="@+id/text_carpool"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <Button
+        android:id="@+id/btn_your_carpool_list"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginLeft="208dp"
+        android:layout_marginTop="124dp"
+        android:background="@drawable/btn_upcoming_events"
+        android:text="Your Carpool List"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/groupCarpoolButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="288dp"
-        android:contentDescription="Press this bu"
-        android:text="Group Carpool"
-        app:layout_constraintBottom_toTopOf="@+id/campusCarpoolButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:id="@+id/btn_global_carpool_list"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginLeft="88dp"
+        android:layout_marginTop="336dp"
+        android:background="@drawable/btn_clubs"
+        android:text="Global Carpool List"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="23dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/campusCarpoolButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="Press this button, you will be leading to the campus carpool page"
-        android:text="Campus Carpool"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     /** Set up the Button to go to the UPCOMING_EVENTS (activity_upcoming_events.xml) page */
     // Animation Bounce
-    public void tapButton(View view){
+    private void tapButton(View view){
 
         this.upcomingEventsButton = (Button)view.findViewById(R.id.btn_upcoming_events);
         this.sharedEventsButton = (Button)view.findViewById(R.id.btn_shared_events);
