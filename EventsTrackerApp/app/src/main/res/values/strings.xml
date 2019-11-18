@@ -9,6 +9,8 @@
     <string name="nav_all_events">View All Events</string>
     <string name="nav_club_events">View My Clubs Events</string>
     <string name="nav_club_members">View My Clubs Members</string>
+    <string name="nav_manage_users">Manage Users</string>
+    <string name="nav_manage_events">Manage Events</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
@@ -31,8 +33,7 @@
     <string name="tv_goto_signup">Are you a new user? Click here</string>
     <string name="tv_goto_login">Already have an account? Click here</string>
 
-    <string name="current_date">October, 2019</string>
-    <string name="add_event">ADD CALENDAR EVENT</string>
+    <string name="current_date">November, 2019</string>
     <string name="sun">SUN</string>
     <string name="mon">MON</string>
     <string name="tue">TUE</string>
@@ -40,5 +41,9 @@
     <string name="thu">THU</string>
     <string name="fri">FRI</string>
     <string name="sat">SAT</string>
-    <string name="last_date">31</string>
+    <string name="last_date">30</string>
+    <string name="title_activity_your_carpool_list">YourCarpoolListActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="title_activity_global_carpool_list">GlobalCarpoolListActivity</string>
 </resources>
