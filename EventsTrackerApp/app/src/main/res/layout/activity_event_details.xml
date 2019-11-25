@@ -23,8 +23,7 @@
         android:src="@drawable/ic_add_event_to_calendar"
         android:tint="@color/colorWhite"
         app:maxImageSize="35dp"
-        app:rippleColor="@android:color/holo_red_dark"
-        android:onClick="fabAddToCalendar"/>
+        app:rippleColor="@android:color/holo_red_dark"/>
 
     <!-- FLOATING ACTION BUTTON FOR RSVPING TO EVENT -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,8 +39,7 @@
         android:src="@drawable/ic_event_rsvp"
         android:tint="@color/colorWhite"
         app:maxImageSize="35dp"
-        app:rippleColor="@android:color/holo_red_dark"
-        android:onClick="fabRSVP"/>
+        app:rippleColor="@android:color/holo_red_dark"/>
 
     <!-- FLOATING ACTION BUTTON FOR CARPOOLING TO EVENT -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -57,8 +55,7 @@
         android:src="@drawable/ic_menu_carpool"
         android:tint="@color/colorWhite"
         app:maxImageSize="35dp"
-        app:rippleColor="@android:color/holo_red_dark"
-        android:onClick="fabAddToCarpool"/>
+        app:rippleColor="@android:color/holo_red_dark"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

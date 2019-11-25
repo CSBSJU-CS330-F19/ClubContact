@@ -33,8 +33,7 @@
     <string name="tv_goto_signup">Are you a new user? Click here</string>
     <string name="tv_goto_login">Already have an account? Click here</string>
 
-    <string name="current_date">October, 2019</string>
-    <string name="add_event">ADD CALENDAR EVENT</string>
+    <string name="current_date">November, 2019</string>
     <string name="sun">SUN</string>
     <string name="mon">MON</string>
     <string name="tue">TUE</string>
@@ -42,6 +41,10 @@
     <string name="thu">THU</string>
     <string name="fri">FRI</string>
     <string name="sat">SAT</string>
-    <string name="last_date">31</string>
-    <string name="title_activity_all_users_recycler_view">AllUsersRecyclerViewActivity</string>
+    <string name="last_date">30</string>
+
+    <string name="title_activity_your_carpool_list">YourCarpoolListActivity</string>
+    <string name="tab_text_1">Driver</string>
+    <string name="tab_text_2">Rider</string>
+    <string name="title_activity_global_carpool_list">GlobalCarpoolListActivity</string>
 </resources>

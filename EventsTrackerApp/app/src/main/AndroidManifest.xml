@@ -9,10 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.manageUsers.ManageUsersRecyclerActivity"></activity>
-        <activity android:name=".ui.manageEvents.ManageEventsRecyclerActivity" />
-        <activity android:name=".ui.allUsers.AllUsersRecyclerActivity" />
-        <activity android:name=".ui.allEvents.AllEventRecyclerActivity" />
+        <activity android:name=".ui.carpool.YourCarpoolList.addCarpool.DialogAddCarpool"></activity>
+        <activity
+            android:name=".ui.carpool.GlobalCarpoolList.MainGlobalCarpoolListActivity"
+            android:label="@string/title_activity_global_carpool_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.carpool.YourCarpoolList.MainYourCarpoolListActivity"
+            android:label="@string/title_activity_your_carpool_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.calendar.CalendarActivity" />
         <activity android:name=".ui.home.upcoming.UpcomingEvents" />
         <activity android:name=".ui.home.upcoming.details.EventDetailsHostActivity" />
         <activity android:name=".ui.home.upcoming.details.EventDetailsActivity" />
