@@ -43,4 +43,5 @@
     <string name="fri">FRI</string>
     <string name="sat">SAT</string>
     <string name="last_date">31</string>
+    <string name="title_activity_all_users_recycler_view">AllUsersRecyclerViewActivity</string>
 </resources>
