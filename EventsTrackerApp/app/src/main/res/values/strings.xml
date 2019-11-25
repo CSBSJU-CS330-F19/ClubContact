@@ -42,8 +42,9 @@
     <string name="fri">FRI</string>
     <string name="sat">SAT</string>
     <string name="last_date">30</string>
+
     <string name="title_activity_your_carpool_list">YourCarpoolListActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Driver</string>
+    <string name="tab_text_2">Rider</string>
     <string name="title_activity_global_carpool_list">GlobalCarpoolListActivity</string>
 </resources>
