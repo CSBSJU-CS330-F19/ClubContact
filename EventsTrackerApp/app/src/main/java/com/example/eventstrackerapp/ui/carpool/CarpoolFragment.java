@@ -17,6 +17,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.eventstrackerapp.R;
+import com.example.eventstrackerapp.ui.carpool.GlobalCarpoolList.MainGlobalCarpoolListActivity;
+import com.example.eventstrackerapp.ui.carpool.YourCarpoolList.MainYourCarpoolListActivity;
 import com.example.eventstrackerapp.ui.home.animations.MyBounceInterpolator;
 import com.example.eventstrackerapp.ui.home.animations.MyRotateInterpolator;
 import com.example.eventstrackerapp.ui.home.upcoming.UpcomingEvents;
@@ -41,6 +43,7 @@ public class CarpoolFragment extends Fragment implements View.OnClickListener{
 
         // set up onClick listeners
         this.yourCarpoolListButton.setOnClickListener(this);
+        this.globalCarpoolListButton.setOnClickListener(this);
 
 
         return root;
@@ -77,12 +80,17 @@ public class CarpoolFragment extends Fragment implements View.OnClickListener{
 
             case R.id.btn_your_carpool_list:
 
-                // Perform the Animation
-                new MyRotateInterpolator(v, yourCarpoolListButton).rotateAnimation();
-
                 // Go to Your Carpool List
-                //Intent goToYourCarpoolList = new Intent(getContext(), YourCarpoolListActivity.class);
-                //startActivity(goToYourCarpoolList);
+                Intent goToYourCarpoolList = new Intent(getContext(), MainYourCarpoolListActivity.class);
+                startActivity(goToYourCarpoolList);
+                break;
+
+            case R.id.btn_global_carpool_list:
+
+                // Go to Global Carpool List
+                Intent goToGlobalCarpoolList = new Intent(getContext(), MainGlobalCarpoolListActivity.class);
+                startActivity(goToGlobalCarpoolList);
+                break;
         }
     }
 }
