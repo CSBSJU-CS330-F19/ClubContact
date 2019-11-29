@@ -16,12 +16,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.eventstrackerapp.Event;
 import com.example.eventstrackerapp.R;
 
 import java.text.DateFormat;
@@ -34,7 +37,7 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
 
     // widgets
     private EditText mTitle, mDriver, mVehicle, mSeatNumber, mPickupLocation, mDropoffLocation;
-    private TextView mSetTime, mSetDate, mPickupTime, mPickupDate, mCreate, mCancel;
+    private TextView mSetTime, mSetDate, mSetEvent, mPickupTime, mPickupDate, mCreate, mCancel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
 
         mSetTime = view.findViewById(R.id.dia_add_carpool_set_time);
         mSetDate = view.findViewById(R.id.dia_add_carpool_set_date);
+        mSetEvent = view.findViewById(R.id.dia_add_carpool_set_event);
         mPickupTime = view.findViewById(R.id.dia_add_carpool_time);
         mPickupDate = view.findViewById(R.id.dia_add_carpool_date);
         mCreate = view.findViewById(R.id.dia_add_carpool_create);
@@ -66,6 +70,7 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
 
         mSetTime.setOnClickListener(this);
         mSetDate.setOnClickListener(this);
+        mSetEvent.setOnClickListener(this);
         mCancel.setOnClickListener(this);
         mCreate.setOnClickListener(this);
 
@@ -83,6 +88,9 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
                 break;
             case R.id.dia_add_carpool_set_date:
                 showDatePickerDialog(v);
+                break;
+            case R.id.dia_add_carpool_set_event:
+                //Todo: show a dialog of all the events
                 break;
             case R.id.dia_add_carpool_create:
                 if(mTitle.equals("") || mDriver.equals("") || mVehicle.equals("") ||
@@ -192,6 +200,7 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
      */
     public interface CarpoolDialogListener{
         // There is new Carpool Information
+        // Todo: When the Carpool class changes in terms of its instances, add or delete those instances here
         void sentInput(String title);
     }
 

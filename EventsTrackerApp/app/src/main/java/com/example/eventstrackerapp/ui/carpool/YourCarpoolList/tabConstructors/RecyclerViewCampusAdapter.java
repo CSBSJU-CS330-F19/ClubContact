@@ -3,7 +3,10 @@ package com.example.eventstrackerapp.ui.carpool.YourCarpoolList.tabConstructors;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +24,7 @@ import java.util.Map;
 
 public class RecyclerViewCampusAdapter extends RecyclerView.Adapter<RecyclerViewCampusAdapter.CampusViewHolder> {
 
-    private ArrayList<Carpool> mYourCarpoolList;
+    public ArrayList<Carpool> mYourCarpoolList;
     private ListItemClickListener2 listItemClickListener;
 
     public RecyclerViewCampusAdapter(ArrayList<Carpool> mYourCarpoolList) {
@@ -37,8 +40,20 @@ public class RecyclerViewCampusAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewCampusAdapter.CampusViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewCampusAdapter.CampusViewHolder holder, final int position) {
         holder.title.setText(mYourCarpoolList.get(position).getCarpoolTitle());
+        holder.infoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listItemClickListener.onInfoClick();
+            }
+        });
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listItemClickListener.onDeleteClick(position);
+            }
+        });
     }
 
     @Override
@@ -56,30 +71,44 @@ public class RecyclerViewCampusAdapter extends RecyclerView.Adapter<RecyclerView
         this.listItemClickListener = onItemClickListener;
     }
 
+    /**
+     * Inner class view holder
+     */
     public class CampusViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        private ListItemClickListener2 listItemClickListener;
-        private TextView title;
+        private final ListItemClickListener2 listItemClickListener;
+        protected TextView title;
+        protected ImageButton infoButton;
+        protected ImageButton deleteButton;
 
-        public CampusViewHolder(View itemView, ListItemClickListener2 listItemClickListener) {
+
+        public CampusViewHolder(View itemView, final ListItemClickListener2 listItemClickListener) {
             super(itemView);
 
             this.listItemClickListener = listItemClickListener;
-            itemView.setOnClickListener(this);
 
             this.title = itemView.findViewById(R.id.carpool_title);
 
+            this.infoButton = itemView.findViewById(R.id.info_button);
+            this.infoButton.setOnClickListener(this);
+
+            this.deleteButton= itemView.findViewById(R.id.delete_button);
+            this.deleteButton.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if(listItemClickListener != null){
                 listItemClickListener.onItemClick(getLayoutPosition(), v);
+                listItemClickListener.onDeleteClick(getAdapterPosition());
+                listItemClickListener.onInfoClick();
             }
         }
     }
 
     public interface ListItemClickListener2{
         void onItemClick(int position, View v);
+        void onDeleteClick(int position);
+        void onInfoClick();
     }
 }
