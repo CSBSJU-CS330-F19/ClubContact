@@ -1,19 +1,31 @@
 package com.example.eventstrackerapp.ui.carpool.YourCarpoolList;
 
+import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.eventstrackerapp.R;
 import com.example.eventstrackerapp.ui.carpool.YourCarpoolList.addCarpool.DialogAddCarpool;
+import com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CarpoolDetailsActivity;
 import com.example.eventstrackerapp.ui.carpool.YourCarpoolList.tabConstructors.RecyclerViewCampusAdapter;
 import com.example.eventstrackerapp.ui.carpool.entities.Car;
 import com.example.eventstrackerapp.ui.carpool.entities.Carpool;
@@ -22,8 +34,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialogListener {
+
+public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialogListener{
 
     private ArrayList<Carpool> mCarpoolSet;
 
@@ -32,16 +46,21 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
 
     private RecyclerViewCampusAdapter listAdapter;
 
+
+
     // Singleton?
-    public static DriverTab instance(){
-        return new DriverTab();
-    }
+    public static DriverTab instance(){ return new DriverTab(); }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_your_carpool_list_driver_tab, container, false);
+        init(view);
+        return view;
+    }
 
+
+    public void init(View view){
         /**
          * INITIALIZE
          */
@@ -57,6 +76,7 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
+
         // Sets up the Floating Action Button
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,31 +88,55 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
             }
         });
 
+
+
         /**
          * VIEW_CLICK_LISTENER
          */
         ((RecyclerViewCampusAdapter)listAdapter).setOnItemClickListener(new RecyclerViewCampusAdapter.ListItemClickListener2() {
             @Override
             public void onItemClick(int position, View v) {
-                Toast.makeText(getActivity(), "position: "+position, Toast.LENGTH_SHORT).show();
-                viewCarpoolDetails(position, v);
+                //Toast.makeText(getActivity(), "position: "+position, Toast.LENGTH_SHORT).show();
+                //viewCarpoolDetails();
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                deleteCarpool(position);
+            }
+
+            @Override
+            public void onInfoClick() {
+                viewCarpoolDetails();
             }
         });
+
+
 
         /**
          * LOAD DATA
          */
         ArrayList<Car> cars = new ArrayList<>();
-        mCarpoolSet.add(new Carpool("ID", "DUMMY1", cars));
-        mCarpoolSet.add(new Carpool("ID2", "DUMMY2", cars));
+
+        for(int i=1; i<=20; i++){
+            mCarpoolSet.add(new Carpool("ID" + i, "DUMMY" + i, cars));
+
+        }
         listAdapter.notifyDataSetChanged();
-
-        return view;
     }
 
-    public void viewCarpoolDetails(int position, View v){
 
+
+    public void viewCarpoolDetails(){
+        startActivity(new Intent(getActivity(), CarpoolDetailsActivity.class));
     }
+
+    public void deleteCarpool(int position){
+        listAdapter.mYourCarpoolList.remove(position);
+        listAdapter.notifyItemRemoved(position);
+        listAdapter.notifyItemRangeChanged(position, listAdapter.getItemCount());
+    }
+
 
 
     /**
@@ -104,4 +148,5 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
         mCarpoolSet.add(new Carpool(title));
         listAdapter.notifyItemInserted(mCarpoolSet.size());
     }
+
 }

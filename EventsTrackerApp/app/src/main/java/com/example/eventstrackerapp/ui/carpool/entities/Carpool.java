@@ -1,6 +1,8 @@
 package com.example.eventstrackerapp.ui.carpool.entities;
 
 
+import com.example.eventstrackerapp.Event;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ public class Carpool {
     private String carpoolID;
     private String carpoolTitle;
     private ArrayList<Car> cars;
+    private Event event;
 
     public Carpool(String carpoolTitle) {
         this.carpoolTitle = carpoolTitle;
@@ -19,6 +22,13 @@ public class Carpool {
         this.carpoolID = carpoolID;
         this.carpoolTitle = carpoolTitle;
         this.cars = cars;
+    }
+
+    public Carpool(String carpoolID, String carpoolTitle, ArrayList<Car> cars, Event event) {
+        this.carpoolID = carpoolID;
+        this.carpoolTitle = carpoolTitle;
+        this.cars = cars;
+        this.event = event;
     }
 
     public String getCarpoolID() {
@@ -43,5 +53,13 @@ public class Carpool {
 
     public void setCars(ArrayList<Car> cars) {
         this.cars = cars;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }

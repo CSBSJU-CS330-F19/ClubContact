@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.carpool.YourCarpoolList.addCarpool.DialogAddCarpool"></activity>
+        <activity
+            android:name=".ui.carpool.YourCarpoolList.editCarpool.CarpoolDetailsActivity"></activity>
+        <activity android:name=".ui.carpool.YourCarpoolList.addCarpool.DialogAddCarpool" />
         <activity
             android:name=".ui.carpool.GlobalCarpoolList.MainGlobalCarpoolListActivity"
             android:label="@string/title_activity_global_carpool_list"
