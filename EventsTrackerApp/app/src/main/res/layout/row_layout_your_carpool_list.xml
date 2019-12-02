@@ -6,7 +6,8 @@
     android:layout_height="90dp"
     android:layout_gravity="center_vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:dragFromEdge="right">
+    app:dragFromEdge="right"
+    tools:context="ui.carpool.YourCarpoolList.DriverTab">
 
     <FrameLayout
         android:layout_width="wrap_content"

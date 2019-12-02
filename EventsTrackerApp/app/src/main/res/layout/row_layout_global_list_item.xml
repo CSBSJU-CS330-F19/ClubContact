@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorLightBlue"
+    android:paddingBottom="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorDarkGray">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/title_global_item"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Carpool Title"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:paddingRight="10dp"/>
+
+            <TextView
+                android:id="@+id/time_global_item"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:text="time"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:paddingLeft="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/event_global_item"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="Event: "
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:paddingRight="15dp"/>
+
+            <TextView
+                android:id="@+id/location_global_item"
+                android:layout_width="172dp"
+                android:layout_height="wrap_content"
+                android:text="location"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -11,6 +11,9 @@ public class Driver{
     private String driverID;
     private String driverName;
 
+    public Driver(){
+
+    }
 
     public Driver(String driverID, String driverName) {
         this.driverID = driverID;
