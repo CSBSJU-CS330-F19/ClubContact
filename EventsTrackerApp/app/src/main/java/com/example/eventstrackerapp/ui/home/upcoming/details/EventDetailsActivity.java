@@ -55,7 +55,7 @@ public class EventDetailsActivity extends AppCompatActivity implements View.OnCl
         carpoolFab = findViewById(R.id.fab_add_to_carpool);
         carpoolFab.setOnClickListener(this);
 
-        // FETCH THE INFORMATION FROM HOMEFRAGMENT.JAVA
+        // FETCH THE INFORMATION FROM UpcomingEvents.JAVA
         Intent in = getIntent();
         int index = in.getIntExtra("com.example.eventstrackerapp.ui.home.upcoming.details.EVENT_INDEX", -1);
         String title = in.getStringExtra("com.example.eventstrackerapp.ui.home.upcoming.details.EVENT_NAME");
