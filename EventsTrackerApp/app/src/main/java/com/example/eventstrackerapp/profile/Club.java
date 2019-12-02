@@ -13,6 +13,7 @@ public class Club {
     private ArrayList<User> members;
     private ArrayList<Event> events;
     private ArrayList<ClubExec> executives;
+    private ClubType type;
 
     public Club(String name)
     {
@@ -52,6 +53,11 @@ public class Club {
     public ArrayList<ClubExec> getExecutives()
     {
         return executives;
+    }
+
+    public ClubType getType()
+    {
+        return type;
     }
 
     public void addEvent(Event e)
