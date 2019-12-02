@@ -2,7 +2,6 @@ package com.example.eventstrackerapp.ui.carpool.entities;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class Car {
 
@@ -11,20 +10,22 @@ public class Car {
     private ArrayList<Passenger> riders;
     private int seats;
     private String type;
-    private ArrayList<String> allPickUpLocations;
-    private ArrayList<String> allDropOffLocations;
-    private ArrayList<Date> allPickUpTimes;
+    private String allPickUpLocation;
+    private String allDropOffLocation;
+    private Date allPickUpTime;
+
+    public Car(){}
 
     public Car(String carID, Driver driver, ArrayList<Passenger> riders, int seats, String type,
-               ArrayList<String> allPickUpLocations, ArrayList<String> allDropOffLocations, ArrayList<Date> allPickUpTimes) {
+               String allPickUpLocation, String allDropOffLocation, Date allPickUpTime) {
         this.carID = carID;
         this.driver = driver;
         this.riders = riders;
         this.seats = seats;
         this.type = type;
-        this.allPickUpLocations = allPickUpLocations;
-        this.allDropOffLocations = allDropOffLocations;
-        this.allPickUpTimes = allPickUpTimes;
+        this.allPickUpLocation = allPickUpLocation;
+        this.allDropOffLocation = allDropOffLocation;
+        this.allPickUpTime = allPickUpTime;
     }
 
     public String getCarID() {
@@ -67,27 +68,27 @@ public class Car {
         this.type = type;
     }
 
-    public ArrayList<String> getAllPickUpLocations() {
-        return allPickUpLocations;
+    public String getAllPickUpLocation() {
+        return allPickUpLocation;
     }
 
-    public void setAllPickUpLocations(ArrayList<String> allPickUpLocations) {
-        this.allPickUpLocations = allPickUpLocations;
+    public void setAllPickUpLocation(String allPickUpLocation) {
+        this.allPickUpLocation = allPickUpLocation;
     }
 
-    public ArrayList<String> getAllDropOffLocations() {
-        return allDropOffLocations;
+    public String getAllDropOffLocation() {
+        return allDropOffLocation;
     }
 
-    public void setAllDropOffLocations(ArrayList<String> allDropOffLocations) {
-        this.allDropOffLocations = allDropOffLocations;
+    public void setAllDropOffLocation(String allDropOffLocation) {
+        this.allDropOffLocation = allDropOffLocation;
     }
 
-    public ArrayList<Date> getAllPickUpTimes() {
-        return allPickUpTimes;
+    public Date getAllPickUpTime() {
+        return allPickUpTime;
     }
 
-    public void setAllPickUpTimes(ArrayList<Date> allPickUpTimes) {
-        this.allPickUpTimes = allPickUpTimes;
+    public void setAllPickUpTime(Date allPickUpTime) {
+        this.allPickUpTime = allPickUpTime;
     }
 }
