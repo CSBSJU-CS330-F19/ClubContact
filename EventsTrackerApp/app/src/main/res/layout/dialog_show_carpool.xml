@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.carpool.GlobalCarpoolList.DialogShowCarpool"
+    android:background="@android:color/holo_orange_light"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:id="@+id/dia_global_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLOSE"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_blue_dark"/>
+
+        <TextView
+            android:id="@+id/dia_global_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JOIN"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_marginLeft="290dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dia_global_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Carpool Title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingBottom="5dp"
+        android:textColor="@android:color/holo_green_dark"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Event"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/dia_global_event"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Event"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Driver"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/dia_global_driver"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Driver"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Vehicle"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/dia_global_vehicle"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Vehicle"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Total Seat Number"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/dia_global_seat_total"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Seat Number"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Remaining Seat Number"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/dia_global_seat_rem"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Seat Number"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Pickup Location"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/dia_global_pickup_location"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Pickup Location"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Dropoff Location"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/dia_global_dropoff_location"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Dropoff Location"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Pickup Time"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/dia_global_pickup_time"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Pickup Time"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"/>
+
+    <TextView
+        android:id="@+id/dia_global_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"/>
+
+</LinearLayout>

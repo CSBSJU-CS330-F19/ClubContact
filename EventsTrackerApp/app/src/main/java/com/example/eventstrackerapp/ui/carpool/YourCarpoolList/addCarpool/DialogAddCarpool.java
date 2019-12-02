@@ -28,16 +28,23 @@ import com.example.eventstrackerapp.Event;
 import com.example.eventstrackerapp.R;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
-public class DialogAddCarpool extends DialogFragment implements View.OnClickListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class DialogAddCarpool extends DialogFragment implements
+        View.OnClickListener,
+        TimePickerDialog.OnTimeSetListener,
+        DatePickerDialog.OnDateSetListener,
+        DialogAddEvent.CarpoolDialogListener2{
 
     private static final String TAG = "DialogAddCarpool";
 
     // widgets
     private EditText mTitle, mDriver, mVehicle, mSeatNumber, mPickupLocation, mDropoffLocation;
-    private TextView mSetTime, mSetDate, mSetEvent, mPickupTime, mPickupDate, mCreate, mCancel;
+    private TextView mSetTime, mSetDate, mSetEvent, mPickupTime, mPickupDate, mEvent, mCreate, mCancel;
+    private String eventID;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +72,7 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
         mSetEvent = view.findViewById(R.id.dia_add_carpool_set_event);
         mPickupTime = view.findViewById(R.id.dia_add_carpool_time);
         mPickupDate = view.findViewById(R.id.dia_add_carpool_date);
+        mEvent = view.findViewById(R.id.dia_add_carpool_event);
         mCreate = view.findViewById(R.id.dia_add_carpool_create);
         mCancel = view.findViewById(R.id.dia_add_carpool_cancel);
 
@@ -91,18 +99,41 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
                 break;
             case R.id.dia_add_carpool_set_event:
                 //Todo: show a dialog of all the events
+                DialogAddEvent dialogAddEvent = new DialogAddEvent();
+                dialogAddEvent.setTargetFragment(DialogAddCarpool.this, 1);
+                dialogAddEvent.show(getFragmentManager(), "Select an Event"); // getFragmentManager -> getSupportFragmentManager in Activity class
                 break;
             case R.id.dia_add_carpool_create:
-                if(mTitle.equals("") || mDriver.equals("") || mVehicle.equals("") ||
-                        mSeatNumber.equals("") || mPickupLocation.equals("") ||
-                        mDropoffLocation.equals("") || mPickupTime.equals("Pickup Time") || mPickupDate.equals("Pickup Date")){
+
+                if(
+                        this.mTitle.getText().toString().matches("") ||
+                        this.mDriver.getText().toString().matches("") ||
+                        this.mVehicle.getText().toString().matches("") ||
+                        this.mSeatNumber.getText().toString().matches("") ||
+                        this.mPickupLocation.getText().toString().matches("") ||
+                        this.mDropoffLocation.getText().toString().matches("") ||
+                        this.mPickupTime.getText().toString().matches("Pickup Time") ||
+                        this.mPickupDate.getText().toString().matches("Pickup Date") ||
+                        this.mEvent.getText().toString().matches("Event")
+                ){
                     Toast.makeText(getActivity(), "Fill in Empty Fields", Toast.LENGTH_LONG).show();
+
                 } else {
 //                    // Todo: Create a new Carpool Class with information and send it to the DriverTab RecyclerView
+
                     CarpoolDialogListener listener = getListener();
                     if(listener != null){
-                        listener.sentInput(mTitle.getText().toString());
+                        listener.sentInput(mTitle.getText().toString(),
+                                            eventID,
+                                            mDriver.getText().toString(),
+                                            mVehicle.getText().toString(),
+                                            Integer.parseInt(mSeatNumber.getText().toString()),
+                                            mPickupLocation.getText().toString(),
+                                            mDropoffLocation.getText().toString(),
+                                            mPickupTime.getText().toString(),
+                                            mPickupDate.getText().toString());
                     }
+
                 }
                 getDialog().dismiss();
                 break;
@@ -195,13 +226,14 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
 
+
     /**
      * This interface will allow information to be sent to the RecyclerView located in a fragment
      */
     public interface CarpoolDialogListener{
         // There is new Carpool Information
         // Todo: When the Carpool class changes in terms of its instances, add or delete those instances here
-        void sentInput(String title);
+        void sentInput(String title, String eventID, String driver, String vehicle, int seat, String pickuploc, String dropoffloc, String time, String date);
     }
 
     /**
@@ -223,6 +255,16 @@ public class DialogAddCarpool extends DialogFragment implements View.OnClickList
             Log.e("Custom Dialog", "onAttach: ClassCastException: " + cce.getMessage());
         }
         return null;
+    }
+
+    /**
+     * Interface method to get information from dialog to make a new Carpool
+     * @param title
+     */
+    @Override
+    public void sentInput2(String title, String id) {
+        mEvent.setText(title);
+        eventID = id;
     }
 
 }

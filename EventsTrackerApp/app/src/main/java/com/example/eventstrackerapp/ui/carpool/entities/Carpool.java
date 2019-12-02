@@ -11,23 +11,27 @@ public class Carpool {
 
     private String carpoolID;
     private String carpoolTitle;
-    private ArrayList<Car> cars;
+    private Car car;
     private Event event;
+
+    public Carpool(){
+
+    }
 
     public Carpool(String carpoolTitle) {
         this.carpoolTitle = carpoolTitle;
     }
 
-    public Carpool(String carpoolID, String carpoolTitle, ArrayList<Car> cars) {
+    public Carpool(String carpoolID, String carpoolTitle, Car car) {
         this.carpoolID = carpoolID;
         this.carpoolTitle = carpoolTitle;
-        this.cars = cars;
+        this.car = car;
     }
 
-    public Carpool(String carpoolID, String carpoolTitle, ArrayList<Car> cars, Event event) {
+    public Carpool(String carpoolID, String carpoolTitle, Car car, Event event) {
         this.carpoolID = carpoolID;
         this.carpoolTitle = carpoolTitle;
-        this.cars = cars;
+        this.car = car;
         this.event = event;
     }
 
@@ -47,12 +51,12 @@ public class Carpool {
         this.carpoolTitle = carpoolTitle;
     }
 
-    public ArrayList<Car> getCars() {
-        return cars;
+    public Car getCar() {
+        return car;
     }
 
-    public void setCars(ArrayList<Car> cars) {
-        this.cars = cars;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public Event getEvent() {
