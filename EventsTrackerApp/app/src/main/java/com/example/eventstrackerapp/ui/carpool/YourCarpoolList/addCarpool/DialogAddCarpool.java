@@ -42,7 +42,7 @@ public class DialogAddCarpool extends DialogFragment implements
     private static final String TAG = "DialogAddCarpool";
 
     // widgets
-    private EditText mTitle, mDriver, mVehicle, mSeatNumber, mPickupLocation, mDropoffLocation;
+    private EditText mTitle, mDriver, mVehicle, mSeatNumber, mPickupLocation, mDropoffLocation, mDescription;
     private TextView mSetTime, mSetDate, mSetEvent, mPickupTime, mPickupDate, mEvent, mCreate, mCancel;
     private String eventID;
 
@@ -66,6 +66,7 @@ public class DialogAddCarpool extends DialogFragment implements
         mSeatNumber = view.findViewById(R.id.dia_add_carpool_seats);
         mPickupLocation = view.findViewById(R.id.dia_add_carpool_pickuploc);
         mDropoffLocation = view.findViewById(R.id.dia_add_carpool_dropoffloc);
+        mDescription = view.findViewById(R.id.dia_add_carpool_description);
 
         mSetTime = view.findViewById(R.id.dia_add_carpool_set_time);
         mSetDate = view.findViewById(R.id.dia_add_carpool_set_date);
@@ -114,8 +115,9 @@ public class DialogAddCarpool extends DialogFragment implements
                         this.mDropoffLocation.getText().toString().matches("") ||
                         this.mPickupTime.getText().toString().matches("Pickup Time") ||
                         this.mPickupDate.getText().toString().matches("Pickup Date") ||
-                        this.mEvent.getText().toString().matches("Event")
-                ){
+                        this.mEvent.getText().toString().matches("Event") ||
+                        this.mDescription.getText().toString().matches("")){
+
                     Toast.makeText(getActivity(), "Fill in Empty Fields", Toast.LENGTH_LONG).show();
 
                 } else {
@@ -131,7 +133,8 @@ public class DialogAddCarpool extends DialogFragment implements
                                             mPickupLocation.getText().toString(),
                                             mDropoffLocation.getText().toString(),
                                             mPickupTime.getText().toString(),
-                                            mPickupDate.getText().toString());
+                                            mPickupDate.getText().toString(),
+                                            mDescription.getText().toString());
                     }
 
                 }
@@ -233,7 +236,9 @@ public class DialogAddCarpool extends DialogFragment implements
     public interface CarpoolDialogListener{
         // There is new Carpool Information
         // Todo: When the Carpool class changes in terms of its instances, add or delete those instances here
-        void sentInput(String title, String eventID, String driver, String vehicle, int seat, String pickuploc, String dropoffloc, String time, String date);
+        void sentInput(String title, String eventID, String driver, String vehicle,
+                       int seat, String pickuploc, String dropoffloc, String time, String date,
+                       String description);
     }
 
     /**

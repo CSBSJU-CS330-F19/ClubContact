@@ -33,10 +33,7 @@ public class CalendarFragment extends Fragment {
         View root = inflater.inflate(R.layout.activity_calendar, container, false);
 
         CustomView mView = root.findViewById(R.id.custom_calendar);
-
-//        startActivity(new Intent(getActivity(), CalendarActivity.class));
-
-
+        mView.setGridCellClickEvents(getFragmentManager());
 
         return root;
     }

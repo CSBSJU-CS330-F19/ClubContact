@@ -1,10 +1,13 @@
 package com.example.eventstrackerapp.ui.calendar;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -13,9 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventstrackerapp.Event;
 import com.example.eventstrackerapp.R;
+import com.example.eventstrackerapp.ui.carpool.YourCarpoolList.addCarpool.RecyclerViewDialogAddEventAdapter;
+import com.example.eventstrackerapp.ui.home.upcoming.details.EventDetailsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,14 +39,14 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import javax.annotation.Nullable;
 
 public class CustomView extends LinearLayout {
 
@@ -53,9 +63,6 @@ public class CustomView extends LinearLayout {
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private CalendarAdapter mAdapter;
 
-    // Firebase instances
-    private FirebaseFirestore firebaseFirestore;
-
     /** CONSTRUCTORS */
     public CustomView(Context context) {
         super(context);
@@ -64,12 +71,11 @@ public class CustomView extends LinearLayout {
     public CustomView(Context context, AttributeSet attrs){
         super(context, attrs);
         this.context = context;
-        firebaseFirestore = FirebaseFirestore.getInstance();
         initializeUILayout();
         setUpCalendarAdapter();
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
-        setGridCellClickEvents();
+        //setGridCellClickEvents();
     }
 
     public CustomView(Context context, AttributeSet attrs, int defStyleAttr){ super(context, attrs, defStyleAttr); }
@@ -138,12 +144,121 @@ public class CustomView extends LinearLayout {
         });
     }
 
-    private void setGridCellClickEvents(){
+    public void setGridCellClickEvents(final FragmentManager supportFragmentManager){
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, "Clicked " + position, Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Clicked " + position, Toast.LENGTH_LONG).show();
+                // Show the Dialog
+                DialogViewCalendarCell dialogViewCalendarCell = new DialogViewCalendarCell(position, view);
+                dialogViewCalendarCell.show(supportFragmentManager, "hi");
+
             }
         });
+    }
+
+    /**
+     *  ======================= Inner Class Dialog ==============================================
+     */
+
+    public static class DialogViewCalendarCell extends DialogFragment implements ViewCalendarCellAdapter.ListItemClickListener6{
+
+        // Firebase instances
+        private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        private CollectionReference eventsCollection = firebaseFirestore.collection("Events");
+
+        private ArrayList<Event> mEventsSets = new ArrayList<>();
+        private ViewCalendarCellAdapter mAdapter = new ViewCalendarCellAdapter(mEventsSets);
+        private RecyclerView recyclerView;
+
+        private int position;
+        private TextView date;
+
+        public DialogViewCalendarCell() {
+        }
+
+        public DialogViewCalendarCell(int position, View view) {
+            this.position = position;
+            this.date = view.findViewById(R.id.date);
+        }
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            super.onCreate(savedInstanceState);
+            int style = DialogFragment.STYLE_NORMAL;
+            int theme = android.R.style.Theme_Holo_Light_Dialog;
+            setStyle(style, theme);
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.activity_view_calendar_cell, container, false);
+
+
+            /**
+             * INIT
+             */
+            recyclerView = view.findViewById(R.id.calendar_cell_events_recycler_view);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(layoutManager);
+
+            recyclerView.setAdapter(mAdapter);
+
+
+            /**
+             * CLICK_LISTENER
+             */
+            mAdapter.setOnItemClickListener(new ViewCalendarCellAdapter.ListItemClickListener6() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    // Todo: Go to Details Page for Events
+                    startActivity(new Intent(getContext(), EventDetailsActivity.class));
+                    getDialog().dismiss();
+                }
+            });
+
+            /**
+             * LOAD DATA
+             */
+            eventsCollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        for(DocumentSnapshot anEvent : task.getResult()){
+                            Event event = anEvent.toObject(Event.class);
+
+                            Date eventStartDate = event.getStart();
+                            SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+                            String day = dayFormat.format(eventStartDate);
+
+                            int calDayNumber = Integer.parseInt(date.getText().toString());
+                            int eventDayNumber = Integer.parseInt(day);
+
+                            if(calDayNumber == eventDayNumber){
+                                mEventsSets.add(event);
+                            }
+                        }
+                        mAdapter.notifyDataSetChanged();
+                        getDialog().setTitle("Select an Event");
+                    }
+                }
+            });
+
+
+            return view;
+
+        }
+
+        @Override
+        public void onItemClick(int position, View v) {
+
+        }
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+        }
     }
 }

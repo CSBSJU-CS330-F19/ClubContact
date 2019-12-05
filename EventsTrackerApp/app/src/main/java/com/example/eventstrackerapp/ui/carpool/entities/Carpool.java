@@ -13,6 +13,7 @@ public class Carpool {
     private String carpoolTitle;
     private Car car;
     private Event event;
+    private String description;
 
     public Carpool(){
 
@@ -33,6 +34,14 @@ public class Carpool {
         this.carpoolTitle = carpoolTitle;
         this.car = car;
         this.event = event;
+    }
+
+    public Carpool(String carpoolID, String carpoolTitle, Car car, Event event, String description) {
+        this.carpoolID = carpoolID;
+        this.carpoolTitle = carpoolTitle;
+        this.car = car;
+        this.event = event;
+        this.description = description;
     }
 
     public String getCarpoolID() {
@@ -65,5 +74,13 @@ public class Carpool {
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
     }
 }

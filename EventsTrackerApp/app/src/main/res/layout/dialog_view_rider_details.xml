@@ -18,6 +18,17 @@
         android:textColor="@android:color/holo_blue_dark"/>
 
     <TextView
+        android:id="@+id/warning_does_not_exist_in_database"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This Carpool is no longer available. Please delete."
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"/>
+
+
+    <TextView
         android:layout_marginTop="15dp"
         android:id="@+id/dia_rider_title"
         android:layout_width="match_parent"

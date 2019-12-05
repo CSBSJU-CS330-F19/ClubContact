@@ -52,6 +52,17 @@ public class Car {
         this.riders = riders;
     }
 
+    public void addRiders(Passenger passenger){this.riders.add(passenger);}
+
+    public void removeRiders(String passengerID){
+        for(Passenger passenger : riders){
+            if(passenger.getPassengerID().equals(passengerID)){
+                riders.remove(passenger);
+                break;
+            }
+        }
+    }
+
     public int getSeats() {
         return seats;
     }
@@ -59,6 +70,8 @@ public class Car {
     public void setSeats(int seats) {
         this.seats = seats;
     }
+
+    public void addSeats(int seats){this.seats += seats;}
 
     public String getType() {
         return type;
@@ -91,4 +104,5 @@ public class Car {
     public void setAllPickUpTime(Date allPickUpTime) {
         this.allPickUpTime = allPickUpTime;
     }
+
 }

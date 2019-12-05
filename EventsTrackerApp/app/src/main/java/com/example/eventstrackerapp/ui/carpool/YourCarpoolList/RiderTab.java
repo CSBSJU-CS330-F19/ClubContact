@@ -25,6 +25,7 @@ import com.example.eventstrackerapp.ui.carpool.entities.Car;
 import com.example.eventstrackerapp.ui.carpool.entities.Carpool;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -42,6 +43,7 @@ public class RiderTab extends Fragment {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private CollectionReference userCollection = firebaseFirestore.collection("Users");
     private CollectionReference carpoolsAsRider = userCollection.document(firebaseAuth.getCurrentUser().getUid()).collection("CarpoolsAsRider");
+    private CollectionReference carpoolCollection = firebaseFirestore.collection("Carpools");
 
     @Nullable
     @Override
@@ -88,10 +90,11 @@ public class RiderTab extends Fragment {
             @Override
             public void onDeleteClick(int position) {
                 deleteCarpool(position);
+                Snackbar.make(getView(), "You have opted out of the Carpool", Snackbar.LENGTH_LONG).show();
             }
             @Override
-            public void onInfoClick() {
-                viewCarpoolDetails();
+            public void onInfoClick(int position) {
+                viewCarpoolDetails(position);
             }
         });
 
@@ -104,6 +107,7 @@ public class RiderTab extends Fragment {
 //            mCarpoolSet.add(new Carpool("ID" + i, "DUMMY" + i, car));
 //        }
 
+
         carpoolsAsRider.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -115,14 +119,21 @@ public class RiderTab extends Fragment {
         });
     }
 
-    public void viewCarpoolDetails(){
-        DialogFragment dialogFragment = new DialogViewRiderDetails();
+    public void viewCarpoolDetails(int position){
+        DialogFragment dialogFragment = new DialogViewRiderDetails(listAdapter.mYourCarpoolList.get(position), carpoolCollection);
         dialogFragment.show(getFragmentManager(), "Rider Information");
     }
 
     public void deleteCarpool(int position){
 
         //Todo: remove from database
+
+        // Remove the passenger from global database rider list
+        String carpoolID = listAdapter.mYourCarpoolList.get(position).getCarpoolID();
+        Carpool carpool = listAdapter.mYourCarpoolList.get(position);
+        carpool.getCar().removeRiders(firebaseAuth.getCurrentUser().getUid());
+        carpoolCollection.document(carpoolID).set(carpool);
+        // delete carpool from database carpoolsAsRider collection
         carpoolsAsRider.document(listAdapter.mYourCarpoolList.get(position).getCarpoolID()).delete();
 
         // Remove from screen
