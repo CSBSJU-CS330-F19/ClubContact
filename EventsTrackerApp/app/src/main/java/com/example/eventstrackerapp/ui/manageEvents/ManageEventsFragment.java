@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventstrackerapp.Event;
+import com.example.eventstrackerapp.profile.Club;
+import com.example.eventstrackerapp.profile.User;
 import com.example.eventstrackerapp.ui.allEvents.EventAdapter;
 import com.example.eventstrackerapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
