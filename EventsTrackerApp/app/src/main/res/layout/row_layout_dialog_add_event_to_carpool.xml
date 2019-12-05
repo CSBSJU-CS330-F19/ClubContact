@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/holo_orange_dark"
+    android:padding="10dp"
+    android:layout_margin="10dp"
+    tools:context=".ui.carpool.YourCarpoolList.addCarpool.DialogAddEvent">
+
+    <TextView
+        android:id="@+id/add_event_title_dia_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/add_event_id_dia_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+</RelativeLayout>

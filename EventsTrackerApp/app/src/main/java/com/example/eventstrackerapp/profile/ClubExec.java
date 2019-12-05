@@ -8,6 +8,7 @@ public class ClubExec extends User {
     public ClubExec(String username)
     {
         super(username, "exec");
+
     }
 
     public Club getClub()
@@ -18,5 +19,15 @@ public class ClubExec extends User {
     public String getPosition()
     {
         return this.position;
+    }
+
+    public void setClub(Club club)
+    {
+        this.club = club;
+    }
+
+    public void setPosition(String position)
+    {
+        this.position = position;
     }
 }

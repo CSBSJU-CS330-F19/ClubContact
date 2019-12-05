@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
             android:imeOptions="actionNext"
-            android:hint="Title"/>
+            android:hint="Title"
+            android:text=""/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -136,6 +137,28 @@
             android:layout_height="wrap_content"
             android:text="Pickup Date"
             android:layout_toRightOf="@+id/dia_add_carpool_set_date"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/dia_add_carpool_set_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SET"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/dia_add_carpool_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event"
+            android:layout_toRightOf="@+id/dia_add_carpool_set_event"
             android:layout_marginLeft="10dp"/>
     </RelativeLayout>
 

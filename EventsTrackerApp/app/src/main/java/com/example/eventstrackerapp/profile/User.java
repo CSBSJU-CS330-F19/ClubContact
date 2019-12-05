@@ -1,4 +1,6 @@
 package com.example.eventstrackerapp.profile;
+import java.util.ArrayList;
+import com.google.firebase.auth.FirebaseUser;
 
 public class User {
     private String userID;
@@ -8,10 +10,13 @@ public class User {
     private String lastName;
     private int gradYear;
     private String userType;
+    private ArrayList<Club> subscriptions;
+    //private FirebaseUser useMe;
 
-    public User(){}
+    public User() {
+    }
 
-    public User(String userID, String userType){
+    public User(String userID, String userType) {
         this.userID = userID;
         this.userType = userType;
     }
@@ -46,6 +51,7 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+        //useMe.updateEmail(password);
     }
 
     public String getFirstName() {
@@ -86,5 +92,20 @@ public class User {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public ArrayList<Club> getSubscriptions()
+    {
+        return subscriptions;
+    }
+
+    public void addClubToSubscriptionList(Club club)
+    {
+        subscriptions.add(club);
+    }
+
+    public void removeClubFromSubscriptionList(Club club)
+    {
+        subscriptions.remove(club);
     }
 }

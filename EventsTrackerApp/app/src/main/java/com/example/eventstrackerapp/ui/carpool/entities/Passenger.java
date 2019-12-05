@@ -12,6 +12,8 @@ public class Passenger {
     private Date pickUpTime;
     private String dropOffLocation;
 
+    public Passenger(){}
+
     public Passenger(String passengerID, String passengerName, String pickUpLocation, Date pickUpTime, String dropOffLocation) {
         this.passengerID = passengerID;
         this.passengerName = passengerName;
