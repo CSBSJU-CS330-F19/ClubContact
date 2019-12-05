@@ -14,6 +14,7 @@ public class Club {
     private ArrayList<Event> events;
     private ArrayList<ClubExec> executives;
     private ClubType type;
+    private String clubID;
 
     public Club(String name)
     {
@@ -41,10 +42,13 @@ public class Club {
     }
     public void addMember(User user){ members.add(user); }
 
-    public void deleteMember(User user){
-        for(int i = 0; i < members.size(); i++){
-            if(members.get(i).getEmail().equals(user.getEmail())){ members.remove(user); }
+    public void deleteMember(User user) {
+        for (int i = 0; i < members.size(); i++) {
+            if (members.get(i).getEmail().equals(user.getEmail())) {
+                members.remove(user);
+            }
         }
+    }
     public ArrayList<User> getMembers()
     {
         return members;
@@ -68,10 +72,16 @@ public class Club {
     public void addEvent(Event e)
     {
         events.add(e);
+        numEvents++;
     }
 
     public void removeEvent(Event e)
     {
         events.remove(e);
+        numEvents--;
+    }
+
+    public String getClubID() {
+        return clubID;
     }
 }
