@@ -33,4 +33,12 @@ public class Club {
     {
         return this.numEvents;
     }
+
+    public void addMember(User user){ members.add(user); }
+
+    public void deleteMember(User user){
+        for(int i = 0; i < members.size(); i++){
+            if(members.get(i).getEmail().equals(user.getEmail())){ members.remove(user); }
+        }
+    }
 }

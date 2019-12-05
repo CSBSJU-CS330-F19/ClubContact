@@ -1,5 +1,6 @@
 package com.example.eventstrackerapp.ui.manageUsers;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.eventstrackerapp.R;
 import com.example.eventstrackerapp.ui.allUsers.UserAdapter;
@@ -29,12 +31,15 @@ import java.util.ArrayList;
 
 public class ManageUsersFragment extends Fragment {
 
+    private Context mContext;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference allUsersRef = db.collection("Users");
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ArrayList<User> users = new ArrayList<User>();
 
     private ManageUsersViewModel manageUsersViewModel;
 
@@ -58,7 +63,6 @@ public class ManageUsersFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        final ArrayList<User> users = new ArrayList<User>();
         layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
         allUsersRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

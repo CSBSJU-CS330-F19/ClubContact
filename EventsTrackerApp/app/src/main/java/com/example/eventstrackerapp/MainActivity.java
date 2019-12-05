@@ -96,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
                         setSupportActionBar(toolbar2);
                         navigationSetupAdmin();
                         break;
+                    case "clubexec":
+                        setContentView(R.layout.activity_main_clubexec);
+                        Toolbar toolbar3 = findViewById(R.id.toolbar);
+                        setSupportActionBar(toolbar3);
+                        navigationSetupClubExec();
+                        break;
                     default:
                         Log.d(TAG, "onCreate: Cannot find user type");
                         break;
@@ -244,6 +250,28 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_viewAllUsers, R.id.nav_manageEvents, R.id.nav_manageUsers)
                 .setDrawerLayout(drawer)
                 .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    public void navigationSetupClubExec(){
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View headView = navigationView.getHeaderView(0);
+        ImageView imgProfile = (ImageView) headView.findViewById(R.id.imgProfile);
+        imgProfile.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            }
+        });
+
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_calendar, R.id.nav_carpool,
+                R.id.nav_subscriptions, R.id.nav_share, R.id.nav_send,
+                R.id.nav_club_members, R.id.nav_club_events).setDrawerLayout(drawer).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
