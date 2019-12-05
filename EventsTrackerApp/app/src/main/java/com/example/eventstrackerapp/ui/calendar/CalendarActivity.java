@@ -23,5 +23,6 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         CustomView mView = findViewById(R.id.custom_calendar);
+        mView.setGridCellClickEvents(getSupportFragmentManager());
     }
 }

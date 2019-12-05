@@ -37,7 +37,7 @@ public class RecyclerViewRiderAdapter extends RecyclerView.Adapter<RecyclerViewR
         holder.infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listItemClickListener4.onInfoClick();
+                listItemClickListener4.onInfoClick(position);
             }
         });
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +88,7 @@ public class RecyclerViewRiderAdapter extends RecyclerView.Adapter<RecyclerViewR
             if(listItemClickListener4 != null){
                 listItemClickListener4.onItemClick(getLayoutPosition(), v);
                 listItemClickListener4.onDeleteClick(getAdapterPosition());
-                listItemClickListener4.onInfoClick();
+                listItemClickListener4.onInfoClick(getAdapterPosition());
             }
         }
     }
@@ -96,6 +96,6 @@ public class RecyclerViewRiderAdapter extends RecyclerView.Adapter<RecyclerViewR
     public interface ListItemClickListener4{
         void onItemClick(int position, View v);
         void onDeleteClick(int position);
-        void onInfoClick();
+        void onInfoClick(int position);
     }
 }

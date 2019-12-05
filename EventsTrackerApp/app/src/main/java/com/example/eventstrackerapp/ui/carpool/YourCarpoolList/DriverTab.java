@@ -126,8 +126,8 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
             }
 
             @Override
-            public void onInfoClick() {
-                viewCarpoolDetails();
+            public void onInfoClick(int position) {
+                viewCarpoolDetails(position);
             }
         });
 
@@ -152,8 +152,35 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
 
 
 
-    public void viewCarpoolDetails(){
-        startActivity(new Intent(getActivity(), CarpoolDetailsActivity.class));
+    public void viewCarpoolDetails(int position){
+
+        Intent goToEditPage = new Intent(getActivity(), CarpoolDetailsActivity.class);
+
+        SimpleDateFormat pickupDateFormat = new SimpleDateFormat("MMM dd, yyyy");
+        SimpleDateFormat pickupTimeFormat = new SimpleDateFormat("hh:mma");
+
+        Date timeAndDate = mCarpoolSet.get(position).getCar().getAllPickUpTime();
+
+        String date = pickupDateFormat.format(timeAndDate);
+        String time = pickupTimeFormat.format(timeAndDate);
+
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_ID", mCarpoolSet.get(position).getCarpoolID());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_TITLE", mCarpoolSet.get(position).getCarpoolTitle());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_DESCRIPTION", mCarpoolSet.get(position).getDescription());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_EVENT_ID", mCarpoolSet.get(position).getEvent().getEventID());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_EVENT_TITLE", mCarpoolSet.get(position).getEvent().getTitle());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_ID", mCarpoolSet.get(position).getCar().getCarID());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_TYPE", mCarpoolSet.get(position).getCar().getType());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_SEATS", mCarpoolSet.get(position).getCar().getSeats());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_DRIVER_ID", mCarpoolSet.get(position).getCar().getDriver().getDriverID());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_DRIVER_NAME", mCarpoolSet.get(position).getCar().getDriver().getDriverName());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_PICKUP_LOC", mCarpoolSet.get(position).getCar().getAllPickUpLocation());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_DROPOFF_LOC", mCarpoolSet.get(position).getCar().getAllDropOffLocation());
+        goToEditPage.putExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_PICKUP_TIME", date + "\n" + time);
+
+
+
+        startActivity(goToEditPage);
     }
 
     public void deleteCarpool(int position){
@@ -186,7 +213,7 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
     }
 
     public void addCarpool(final String title, final String eventID, final String driver, final String vehicle, final int seat,
-                           final String pickuploc, final String dropoffloc, final String time, final String date){
+                           final String pickuploc, final String dropoffloc, final String time, final String date, final String description){
 
         // Find the event from the database and save it as an Event Object
         eventCollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -211,10 +238,15 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
                     String[] dateAttr = date.split("/");
                     String[] timeAttr = time.split(":");
 
-                    int month = Integer.parseInt(dateAttr[0]);
+                    // Set the DATE
+                    int month = (Integer.parseInt(dateAttr[0])) - 1;
                     int day = Integer.parseInt(dateAttr[1]);
-                    int year = Integer.parseInt(dateAttr[2]);
+                    int year = (Integer.parseInt(dateAttr[2])) - 1900;
+                    Log.d(TAG, "Month: " + month);
+                    Log.d(TAG, "Day: " +day);
+                    Log.d(TAG, "Year: " + year);
 
+                    // Set the TIME
                     int hour = Integer.parseInt(timeAttr[0]);
 
                     String minuteString = timeAttr[1];
@@ -244,7 +276,7 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
                     final Car newCar = new Car("", newDriver, passengerArrayList, seat, vehicle, pickuploc, dropoffloc, pickupTimeDate);
                     // ------------------------------------------------------------------------------------------
 
-                    final Carpool newCarpool = new Carpool("", title, newCar, chosenEvent);
+                    final Carpool newCarpool = new Carpool("", title, newCar, chosenEvent, description);
                     mCarpoolSet.add(newCarpool);
 
                     //Todo: add to global database
@@ -287,8 +319,8 @@ public class DriverTab extends Fragment implements DialogAddCarpool.CarpoolDialo
      */
     @Override
     public void sentInput(String title, String eventID, String driver, String vehicle, int seat,
-                          String pickuploc, String dropoffloc, String time, String date) {
-        addCarpool(title, eventID, driver, vehicle, seat, pickuploc, dropoffloc, time, date);
+                          String pickuploc, String dropoffloc, String time, String date, String description) {
+        addCarpool(title, eventID, driver, vehicle, seat, pickuploc, dropoffloc, time, date, description);
     }
 
 }

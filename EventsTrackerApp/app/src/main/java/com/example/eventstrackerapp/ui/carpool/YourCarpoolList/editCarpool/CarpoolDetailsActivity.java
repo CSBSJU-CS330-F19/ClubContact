@@ -1,5 +1,6 @@
 package com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -8,24 +9,37 @@ import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.eventstrackerapp.Event;
 import com.example.eventstrackerapp.R;
 import com.example.eventstrackerapp.ui.carpool.YourCarpoolList.DriverTab;
 import com.example.eventstrackerapp.ui.carpool.YourCarpoolList.addCarpool.DialogAddCarpool;
+import com.example.eventstrackerapp.ui.carpool.entities.Carpool;
 import com.example.eventstrackerapp.ui.carpool.entities.Driver;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
 
 public class CarpoolDetailsActivity extends Activity implements View.OnClickListener{
 
     private static final String TAG = "CarpoolDetailsActivity";
+
+    // vars
+    String carpoolID = "";
 
     // widgets
     private TextView mTitleTV, mEventTV, mDriverTV, mVehicleTV, mSeatTV, mPickupLocTV, mDropoffLocTV, mPickupTimeTV, mDescriptionTV;
@@ -34,6 +48,14 @@ public class CarpoolDetailsActivity extends Activity implements View.OnClickList
 
     // dialog
     private AlertDialog.Builder builderEdit;
+
+    // database
+    private FirebaseFirestore firebaseFirestore= FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private CollectionReference carpoolCollection = firebaseFirestore.collection("Carpools");
+    private CollectionReference userCollection = firebaseFirestore.collection("Users");
+    private CollectionReference carpoolsAsDriver = userCollection.document(firebaseAuth.getCurrentUser().getUid()).collection("CarpoolsAsDriver");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +76,32 @@ public class CarpoolDetailsActivity extends Activity implements View.OnClickList
         this.mPickupTimeTV = findViewById(R.id.carpool_details_time_date_tv);
         this.mDescriptionTV = findViewById(R.id.carpool_details_description_tv);
 
+        Intent in = getIntent();
+        this.carpoolID = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_ID");
+        String carpoolTitle = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_TITLE");
+        String carpoolDescription = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_DESCRIPTION");
+        String eventID = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_EVENT_ID");
+        String eventTitle = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_EVENT_TITLE");
+        String carID = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_ID");
+        String carType = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_TYPE");
+        int carSeats = in.getIntExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_SEATS", -1);
+        String driverID = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_DRIVER_ID");
+        String driverName = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_DRIVER_NAME");
+        String carPickupLoc = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_PICKUP_LOC");
+        String carDropoffLoc = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_DROPOFF_LOC");
+        String carPickupDateTime = in.getStringExtra("com.example.eventstrackerapp.ui.carpool.YourCarpoolList.editCarpool.CARPOOL_CAR_PICKUP_TIME");
+
+
+        this.mTitleTV.setText(carpoolTitle);
+        this.mEventTV.setText(eventTitle);
+        this.mDriverTV.setText(driverName);
+        this.mVehicleTV.setText(carType);
+        this.mSeatTV.setText(Integer.toString(carSeats));
+        this.mPickupLocTV.setText(carPickupLoc);
+        this.mDropoffLocTV.setText(carDropoffLoc);
+        this.mPickupTimeTV.setText(carPickupDateTime);
+        this.mDescriptionTV.setText(carpoolDescription);
+
         this.mTitleET = findViewById(R.id.carpool_details_title_et);
         this.mEventET = findViewById(R.id.carpool_details_event_et);
         this.mDriverET = findViewById(R.id.carpool_details_driver_et);
@@ -63,6 +111,16 @@ public class CarpoolDetailsActivity extends Activity implements View.OnClickList
         this.mDropoffLocET = findViewById(R.id.carpool_details_dropoffloc_et);
         this.mPickupTimeET = findViewById(R.id.carpool_details_time_date_et);
         this.mDescriptionET = findViewById(R.id.carpool_details_description_et);
+
+        this.mTitleET.setText(carpoolTitle);
+        this.mEventET.setText(eventTitle);
+        this.mDriverET.setText(driverName);
+        this.mVehicleET.setText(carType);
+        this.mSeatET.setText(Integer.toString(carSeats));
+        this.mPickupLocET.setText(carPickupLoc);
+        this.mDropoffLocET.setText(carDropoffLoc);
+        this.mPickupTimeET.setText(carPickupDateTime);
+        this.mDescriptionET.setText(carpoolDescription);
 
         this.mEdit = findViewById(R.id.carpool_details_edit);
         this.mEditConfirm = findViewById(R.id.carpool_details_edit_confirm);
@@ -89,10 +147,6 @@ public class CarpoolDetailsActivity extends Activity implements View.OnClickList
                 dialog.dismiss();
             }
         });
-
-    }
-
-    public void setCarpoolInfo(String title, Event event, Driver driver, String car, String seatNum, String pLoc, String dLoc, Date time, String desc){
 
     }
 
@@ -152,7 +206,34 @@ public class CarpoolDetailsActivity extends Activity implements View.OnClickList
     }
 
     public void editCarpoolConfirm(){
-        // Save into database
+        // Todo: Save into global and driver database
+        carpoolCollection.document(this.carpoolID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                final Carpool carpool = documentSnapshot.toObject(Carpool.class);
+                carpool.setCarpoolTitle(mTitleET.getText().toString());
+                carpool.getCar().getDriver().setDriverName(mDriverET.getText().toString());
+                carpool.getCar().setType(mVehicleET.getText().toString());
+                carpool.getCar().setAllPickUpLocation(mPickupLocET.getText().toString());
+                carpool.getCar().setAllDropOffLocation(mDropoffLocET.getText().toString());
+                carpool.setDescription(mDescriptionET.getText().toString());
+
+                // Todo: set the event, time, and seats
+                //  Change the layout so these work
+
+                // *** Save changes to Global Carpool Collection
+                carpoolCollection.document(carpoolID).set(carpool).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Tell user the changes have been saved
+                        Toast.makeText(getApplicationContext(), "Changes have been saved", Toast.LENGTH_LONG).show();
+
+                        // *** Save Changes to the user's Driver Collection
+                        carpoolsAsDriver.document(carpool.getCarpoolID()).set(carpool);
+                    }
+                });
+            }
+        });
 
         // Set new information into TextViews
         this.mTitleTV.setText(this.mTitleET.getText());
