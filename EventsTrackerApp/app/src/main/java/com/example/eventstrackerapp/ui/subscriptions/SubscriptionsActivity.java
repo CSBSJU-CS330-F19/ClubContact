@@ -34,7 +34,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import javax.annotation.Nullable;
 
-public class SubscriptionsActivity extends AppCompatActivity {
+public class SubscriptionsActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -49,6 +49,7 @@ public class SubscriptionsActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference allUsersRef = db.collection("Users");
     private CollectionReference allClubsRef = db.collection("club");
+    private String userId;
 
 
     @Override
@@ -56,16 +57,25 @@ public class SubscriptionsActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceSpace);
         setContentView(R.layout.activity_view_subscriptions);
-        recyclerView = (RecyclerView) findViewById(R.id.subscriptions_recycler_view);
 
-        recyclerView.setHasFixedSize(true);
+        initializeRecycler();
+        loadData();
+    }
 
+    public void initializeRecycler()
+    {
+        mContext = this;
+
+        mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        recyclerView = findViewById(R.id.subscriptions_recycler_view);
         manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
 
+        clubs = new ArrayList<Club>();
         adapter = new SubscriptionAdapter(clubs);
         recyclerView.setAdapter(adapter);
-        loadData();
     }
 
     @Override
@@ -92,6 +102,7 @@ public class SubscriptionsActivity extends AppCompatActivity {
 
                     // Here, we use the Note class instead
                     User user = documentSnapshot.toObject(User.class);
+                    userId = user.getUserID();
                 }
             }
         });
@@ -105,11 +116,21 @@ public class SubscriptionsActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful())
                 {
-                 for(QueryDocumentSnapshot docSnap: task.getResult())
-                 {
+                 for(QueryDocumentSnapshot docSnap: task.getResult()) {
                      Club c = docSnap.toObject(Club.class);
-                     
+                     ArrayList<User> members = c.getMembers();
+                     for (User m : members) {
+                         if(m.getUserID() == userId)
+                         {
+                             clubs.add(c);
+                         }
+                     }
                  }
+                 if(task.getResult().size() != 0)
+                 {
+                     mLastQueriedDocument = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                 }
+                 adapter.notifyDataSetChanged();
                 }
                 else
                 {

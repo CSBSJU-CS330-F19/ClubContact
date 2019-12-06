@@ -14,6 +14,7 @@ public class Club {
     private ArrayList<Event> events;
     private ArrayList<ClubExec> executives;
     private ClubType type;
+    private String clubID;
 
     public Club(String name)
     {
@@ -48,7 +49,6 @@ public class Club {
             }
         }
     }
-
     public ArrayList<User> getMembers()
     {
         return members;
@@ -72,10 +72,16 @@ public class Club {
     public void addEvent(Event e)
     {
         events.add(e);
+        numEvents++;
     }
 
     public void removeEvent(Event e)
     {
         events.remove(e);
+        numEvents--;
+    }
+
+    public String getClubID() {
+        return clubID;
     }
 }
