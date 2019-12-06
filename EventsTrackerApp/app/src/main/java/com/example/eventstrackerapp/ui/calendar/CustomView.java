@@ -193,7 +193,7 @@ public class CustomView extends LinearLayout {
 
         @Nullable
         @Override
-        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.activity_view_calendar_cell, container, false);
 
 
@@ -214,7 +214,12 @@ public class CustomView extends LinearLayout {
                 @Override
                 public void onItemClick(int position, View v) {
                     // Todo: Go to Details Page for Events
-                    startActivity(new Intent(getContext(), EventDetailsActivity.class));
+                    Intent intent = new Intent(getContext(), EventDetailsActivity.class);
+
+                    intent.putExtra("Title", mEventsSets.get(position).getTitle());
+
+
+                    startActivity(intent);
                     getDialog().dismiss();
                 }
             });
